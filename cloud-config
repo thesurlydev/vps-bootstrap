@@ -1,0 +1,21 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+# Install required packages
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - debian-archive-keyring
+  - debian-keyring
+  - git
+  - jq
+  - software-properties-common
+
+# Add Docker GPG key and Docker APT repository
+runcmd:
+  - git clone https://github.com/thesurlydev/vps-bootstrap.git
+  - cd vps-bootstrap
+  - chmod +x bootstrap.sh
+  - ./bootstrap.sh

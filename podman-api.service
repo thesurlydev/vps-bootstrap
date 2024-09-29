@@ -1,0 +1,10 @@
+[Unit]
+Description=Podman API Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/podman system service --time=0 tcp:0.0.0.0:8080
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
