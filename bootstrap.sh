@@ -12,7 +12,7 @@ function install_caddy() {
 }
 
 function expose_caddy() {
-    curl -X POST 'http://localhost:2019/load' -H 'Content-Type: application/json' -d '{"admin": {"listen": "0.0.0.0:2019"}}'
+    curl -X POST 'http://localhost:2019/load' -H 'Content-Type: application/json' -d @caddy-config.json
 }
 
 function install_podman() {
