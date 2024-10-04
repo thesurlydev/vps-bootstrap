@@ -27,10 +27,20 @@ function enable_podman_service() {
     systemctl enable --now podman-api.service
 }
 
+function run_traefik() {
+    podman run -d \
+      --name traefik \
+      -p 80:80 \
+      -p 8080:8080 \  # Optional: Expose the Traefik API/dashboard on port 8080
+      -v $(pwd)/traefik.toml:/etc/traefik/traefik.toml \
+      traefik
+}
 
-install_caddy
-expose_caddy
+
+#install_caddy
+#expose_caddy
 install_podman
 enable_podman_service
+run_traefik
 
 echo "Done!"
