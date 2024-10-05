@@ -18,3 +18,8 @@
 [providers.docker]
   endpoint = "unix:///var/run/docker.sock"  # Use the Podman socket (Docker-compatible)
   exposedByDefault = false  # Only expose containers that have the correct labels
+
+[certificatesResolvers.letsencrypt.acme]
+  email = "shane@surly.dev"
+  storage = "/acme.json"
+  tlsChallenge = true
