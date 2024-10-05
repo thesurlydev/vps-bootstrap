@@ -27,8 +27,12 @@ function enable_podman_service() {
     systemctl enable --now podman-api.service
 }
 
+function enable_podman_socket() {
+    sudo systemctl enable --now podman.socket
+}
+
 function run_traefik() {
-    podman run -d --name traefik -p 80:80 -p 8080:8080 -v /vps-bootstrap/traefik.toml:/etc/traefik/traefik.toml docker.io/library/traefik:latest
+    podman run -d --name traefik -p 80:80 -p 8080:8080 -v /run/podman/podman.sock:/var/run/docker.sock -v /vps-bootstrap/traefik.toml:/etc/traefik/traefik.toml docker.io/library/traefik:latest
 }
 
 
@@ -36,6 +40,7 @@ function run_traefik() {
 #expose_caddy
 install_podman
 enable_podman_service
+enable_podman_socket
 run_traefik
 
 echo "Done!"
