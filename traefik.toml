@@ -14,3 +14,7 @@
 
 [providers.rest]
 # Enable the REST provider to accept dynamic configuration
+
+[providers.docker]
+  endpoint = "unix:///var/run/docker.sock"  # Use the Podman socket (Docker-compatible)
+  exposedByDefault = false  # Only expose containers that have the correct labels
