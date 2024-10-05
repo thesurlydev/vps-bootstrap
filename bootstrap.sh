@@ -32,7 +32,7 @@ function enable_podman_socket() {
 }
 
 function run_traefik() {
-    podman run -d --name traefik -p 80:80 -p 8080:8080 -v /run/podman/podman.sock:/var/run/docker.sock -v /vps-bootstrap/traefik.toml:/etc/traefik/traefik.toml docker.io/library/traefik:latest
+    podman run -d --name traefik --secret CF_DNS_API_TOKEN -e CF_DNS_API_TOKEN_FILE="/run/secrets/CF_DNS_API_TOKEN" -p 80:80 -p 443:443 -p 8080:8080 -v ./letsencrypt:/letsencrypt -v /run/podman/podman.sock:/var/run/docker.sock -v /vps-bootstrap/traefik.toml:/etc/traefik/traefik.toml docker.io/library/traefik:latest
 }
 
 
@@ -41,6 +41,6 @@ function run_traefik() {
 install_podman
 enable_podman_service
 enable_podman_socket
-run_traefik
+#run_traefik
 
 echo "Done!"

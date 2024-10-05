@@ -19,7 +19,10 @@
   endpoint = "unix:///var/run/docker.sock"  # Use the Podman socket (Docker-compatible)
   exposedByDefault = false  # Only expose containers that have the correct labels
 
-[certificatesResolvers.letsencrypt.acme]
-  email = "shane@surly.dev"
-  storage = "/acme.json"
-  tlsChallenge = true
+[certificatesResolvers]
+  [certificatesResolvers.letsencrypt.acme]
+    email = "shane@surly.dev"  # Email for Let's Encrypt registration
+    storage = "/letsencrypt/acme.json"  # Path to store the ACME certificates
+
+    [certificatesResolvers.letsencrypt.acme.dnsChallenge]
+      provider = "cloudflare"  # Use Cloudflare as the DNS provider for ACME challenge
