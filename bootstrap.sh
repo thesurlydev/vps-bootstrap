@@ -28,7 +28,7 @@ function enable_podman_service() {
 }
 
 function run_traefik() {
-    podman run -d --name traefik -p 80:80 -p 8081:8080 -v /vps-bootstrap/traefik.toml:/etc/traefik/traefik.toml docker.io/library/traefik:latest
+    podman run -d --name traefik -p 80:80 -p 8080:8080 -v /vps-bootstrap/traefik.toml:/etc/traefik/traefik.toml docker.io/library/traefik:latest
 }
 
 
