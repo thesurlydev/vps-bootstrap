@@ -1,6 +1,8 @@
 [entryPoints]
   [entryPoints.web]
     address = ":80"  # Listen on HTTP (Cloudflare terminates SSL)
+  [entryPoints.websecure]
+    address = ":443"  # Listen on HTTPS
 
 [api]
   dashboard = true  # Optional: enable dashboard
