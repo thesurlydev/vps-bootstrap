@@ -1,13 +1,14 @@
 [entryPoints]
-[entryPoints.web]
-address = ":80"  # Listen on HTTP (Cloudflare terminates SSL)
+  [entryPoints.web]
+    address = ":80"  # Listen on HTTP (Cloudflare terminates SSL)
 
 [api]
-dashboard = true  # Optional: enable dashboard
-insecure = true   # Allow unsecured access to the API (only use in a trusted environment)
+  dashboard = true  # Optional: enable dashboard
+  insecure = true   # Allow unsecured access to the API (only use in a trusted environment)
+  debug = true      # Optional: enable debug mode
 
 [log]
-level = "INFO"  # Set to "DEBUG" for more detailed logs
+  level = "INFO"  # Set to "DEBUG" for more detailed logs
 
 [providers.rest]
 # Enable the REST provider to accept dynamic configuration
