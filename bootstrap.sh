@@ -4,17 +4,6 @@
 
 set -e
 
-function install_caddy() {
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-    curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-    apt-get update
-    apt-get install -y caddy
-}
-
-function expose_caddy() {
-    curl -X POST 'http://localhost:2019/load' -H 'Content-Type: application/json' -d @caddy-config.json
-}
-
 function install_podman() {
     curl -fsSL -o podman-linux-amd64.tar.gz https://github.com/mgoltzsche/podman-static/releases/latest/download/podman-linux-amd64.tar.gz
     tar -xzf podman-linux-amd64.tar.gz
@@ -31,16 +20,8 @@ function enable_podman_socket() {
     sudo systemctl enable --now podman.socket
 }
 
-function run_traefik() {
-    podman run -d --name traefik --secret CF_DNS_API_TOKEN -e CF_DNS_API_TOKEN_FILE="/run/secrets/CF_DNS_API_TOKEN" -p 80:80 -p 443:443 -p 8080:8080 -v ./letsencrypt:/letsencrypt -v /run/podman/podman.sock:/var/run/docker.sock -v /vps-bootstrap/traefik.toml:/etc/traefik/traefik.toml docker.io/library/traefik:latest
-}
-
-
-#install_caddy
-#expose_caddy
 install_podman
 enable_podman_service
 enable_podman_socket
-#run_traefik
 
 echo "Done!"
