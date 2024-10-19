@@ -15,6 +15,15 @@
 [providers.rest]
 # Enable the REST provider to accept dynamic configuration
 
+#[metrics]
+#  [metrics.otlp]
+#    addEntryPointsLabels = true
+#    addRoutersLabels = true
+#    addServicesLabels = true
+#    pushInterval = "5s"
+#    [metrics.otlp.http]
+#      endpoint = "http://localhost:4318/v1/metrics"
+
 [providers.docker]
   endpoint = "unix:///var/run/docker.sock"  # Use the Podman socket (Docker-compatible)
   exposedByDefault = false  # Only expose containers that have the correct labels
