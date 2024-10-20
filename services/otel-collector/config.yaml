@@ -12,8 +12,6 @@ exporters:
 
 extensions:
   health_check:
-  pprof:
-  zpages:
 
 service:
   extensions: [health_check]
