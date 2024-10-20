@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s  # By default, scrape targets every 15 seconds.
+
+scrape_configs:
+  - job_name: 'prometheus'  # The job name is added as a label `job=<job_name>` to every scraped metric.
+    static_configs:
+      - targets: ['localhost:9090']  # Here Prometheus scrapes itself.
+#  - job_name: "spring"
+#    metrics_path: "/actuator/prometheus"
+#    static_configs:
+#      - targets: [ "api:8080" ]
