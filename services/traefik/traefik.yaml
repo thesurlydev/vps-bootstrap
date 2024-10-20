@@ -19,6 +19,7 @@ providers:
     endpoint: "unix:///var/run/docker.sock"  # Use the Podman socket (Docker-compatible)
     exposedByDefault: false  # Only expose containers that have the correct labels
 
+# TODO Move this to be part of the API Traefik install
 certificatesResolvers:
   letsencrypt:
     acme:

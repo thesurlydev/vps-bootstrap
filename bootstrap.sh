@@ -11,7 +11,7 @@ function install_podman() {
 }
 
 function enable_podman_service() {
-    cp podman-api.service /etc/systemd/system/podman-api.service
+    cp services/podman/podman-api.service /etc/systemd/system/podman-api.service
     systemctl daemon-reload
     systemctl enable --now podman-api.service
 }
