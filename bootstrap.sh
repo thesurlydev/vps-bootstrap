@@ -4,33 +4,39 @@
 
 set -e
 
-VOLUME_1="0HC_Volume_101503771"
+function log() {
+  msg=$1
+  logger -t bootstrap.sh "$msg"
+}
 
 function install_podman() {
+    log "Installing podman..."
     curl -fsSL -o podman-linux-amd64.tar.gz https://github.com/mgoltzsche/podman-static/releases/latest/download/podman-linux-amd64.tar.gz
     tar -xzf podman-linux-amd64.tar.gz
     cp -r podman-linux-amd64/usr podman-linux-amd64/etc /
+    log "Podman install complete"
 }
 
 function enable_podman_service() {
+    log "Enabling podman service..."
     cp services/podman/podman-api.service /etc/systemd/system/podman-api.service
     systemctl daemon-reload
     systemctl enable --now podman-api.service
+    log "Podman service enabled"
 }
 
 function enable_podman_socket() {
-    sudo systemctl enable --now podman.socket
+    log "Enabling Podman socket..."
+    systemctl enable --now podman.socket
+    log "Podman socket enabled"
 }
 
-function mount_volume_1() {
-  mkdir /mnt/volume-1
-  mount -o discard,defaults /dev/disk/by-id/scsi-${VOLUME_1} /mnt/volume-1
-  echo "/dev/disk/by-id/scsi-${VOLUME_1} /mnt/volume-1 ext4 discard,nofail,defaults 0 0" >> /etc/fstab
+function restart_now() {
+    log "Restarting..."
+    reboot --force
 }
 
 install_podman
 enable_podman_service
 enable_podman_socket
-mount_volume_1
-
-echo "Done!"
+restart_now
