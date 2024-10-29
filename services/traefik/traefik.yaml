@@ -11,7 +11,7 @@ entryPoints:
 
 api:
   dashboard: true  # Optional: enable dashboard
-  insecure: true   # Allow unsecured access to the API (only use in a trusted environment)
+  insecure: false  # Needed to point subdomain to the dashboard
   debug: true      # Optional: enable debug mode
 
 log:
