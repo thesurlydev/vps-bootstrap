@@ -1,6 +1,11 @@
 entryPoints:
   web:
     address: ":80"  # Listen on HTTP (Cloudflare terminates SSL)
+    http:
+      redirections:
+        entryPoint:
+          to: websecure  # Redirect to HTTPS
+          scheme: https
   websecure:
     address: ":443"  # Listen on HTTPS
 
