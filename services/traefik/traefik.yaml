@@ -1,4 +1,6 @@
 entryPoints:
+  dbsecure:
+    address: ":5432"    # Listen on PostgreSQL port
   web:
     address: ":80"      # Listen on HTTP (Cloudflare terminates SSL)
     http:
